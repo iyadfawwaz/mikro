@@ -1,0 +1,3 @@
+include ':mikrotik'
+include ':app'
+rootProject.name = "Server"
