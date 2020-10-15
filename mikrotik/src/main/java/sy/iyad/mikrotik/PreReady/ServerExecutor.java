@@ -1,7 +1,6 @@
 package sy.iyad.mikrotik.PreReady;
 
 import android.os.AsyncTask;
-import androidx.annotation.NonNull;
 import java.util.List;
 import java.util.Map;
 import sy.iyad.mikrotik.Ready.Api;
@@ -12,7 +11,7 @@ public class ServerExecutor extends AsyncTask<Api,Integer, List<Map<String,Strin
     public String cmd;
     public static Exception externalExceptionFromExecutor;
     @SuppressWarnings("deprecation")
-    public ServerExecutor(@NonNull String cmd){
+    public ServerExecutor( String cmd){
         this.cmd = cmd;
     }
     @Override

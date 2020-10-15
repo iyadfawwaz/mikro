@@ -1,7 +1,6 @@
 package sy.iyad.mikrotik.PreReady;
 
 
-import androidx.annotation.NonNull;
 
 import sy.iyad.mikrotik.Ready.Api;
 
@@ -15,7 +14,7 @@ public class ConnectResult {
         return api;
     }
 
-    public void setApi( @NonNull Api api) {
+    public void setApi(  Api api) {
         this.api = api;
     }
 }

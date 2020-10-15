@@ -1,8 +1,5 @@
 package sy.iyad.mikrotik.PreReady;
 
-
-import androidx.annotation.NonNull;
-
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +9,7 @@ public class ExecuteResult {
 
     }
 
-    public void setMapList(@NonNull List<Map<String, String>> mapList) {
+    public void setMapList( List<Map<String, String>> mapList) {
         this.mapList = mapList;
     }
 

@@ -1,7 +1,6 @@
 package sy.iyad.mikrotik.PreReady;
 
 
-import androidx.annotation.NonNull;
 
 import sy.iyad.mikrotik.OnCompleteListener;
 
@@ -18,7 +17,7 @@ public class Task <Tx> {
         return onCompleteListener;
     }
 
-    public void addOnCompleteListener(@NonNull OnCompleteListener<Tx> listener) {
+    public void addOnCompleteListener( OnCompleteListener<Tx> listener) {
         this.onCompleteListener = listener;
                listener.onComplete(this);
     }
@@ -35,11 +34,11 @@ public class Task <Tx> {
         return result;
     }
 
-    public void setException(@NonNull Exception exception) {
+    public void setException( Exception exception) {
         this.exception = exception;
     }
 
-    public void setResult(@NonNull Tx result) {
+    public void setResult( Tx result) {
         this.result = result;
     }
 

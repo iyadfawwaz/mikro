@@ -31,19 +31,19 @@ publishing {
 }
 
 bintray {
-    user = project.hasProperty('bintrayUser') ?: System.getenv('BINTRAY_USER')
-    key = project.hasProperty('bintrayApiKey') ?: System.getenv('BINTRAY_API_KEY')
+    user = System.getenv('iyadseizer')
+    key = System.getenv('74c942dfed50ae1131023e42326ca75d4d0982d8')
     publications = ['Production']
     configurations = ['archives']
     override = true
     pkg {
-        repo = 'mikrotik'
+        repo = 'mikro'
         name = 'mikrotik'
         description = "An example of using the bintray plugin with gradle plugin 3.0.0"
         publish = true
         publicDownloadNumbers = true
         licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/iyadseizer/mikrotik.git'
+        vcsUrl = 'https://github.com/iyadseizer/mikro.git'
         dryRun = true
         version {
             name = this.version

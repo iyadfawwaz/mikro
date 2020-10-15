@@ -1,7 +1,5 @@
 package sy.iyad.mikrotik;
 
-import androidx.annotation.NonNull;
-
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -62,7 +60,7 @@ public class MikrotikServer {
         return connectResultTask;
     }
 
-    private void setupExecute(@NonNull Api readyApi,@NonNull String cmd){
+    private void setupExecute( Api readyApi, String cmd){
         executeResultTask = new Task<>();
         try {
             mapList = new ServerExecutor(cmd).execute(readyApi).get();
