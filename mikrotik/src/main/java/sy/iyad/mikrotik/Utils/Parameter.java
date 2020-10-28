@@ -1,12 +1,13 @@
-package sy.iyad.mikrotik.Roots;
+package sy.iyad.mikrotik.Utils;
 
 /**
  * A command parameter
  *
- * @author GideonLeGrange
+ * @author iyadFawwaz
  */
 class Parameter {
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public String toString() {
         if (hasValue()) {
@@ -36,6 +37,6 @@ class Parameter {
     String getValue() {
         return value;
     }
-    private String name;
-    private String value;
+    private final String name;
+    private final String value;
 }

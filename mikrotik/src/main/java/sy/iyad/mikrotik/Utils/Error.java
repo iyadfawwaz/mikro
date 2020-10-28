@@ -1,9 +1,10 @@
-package sy.iyad.mikrotik.Roots;
+package sy.iyad.mikrotik.Utils;
+
 
 /**
  * Used to encapsulate API error information. We need to pass both the message and the tag (if one was used).
  *
- * @author GideonLeGrange
+ * @author iyadFawwaz
  */
 class Error extends Response {
 

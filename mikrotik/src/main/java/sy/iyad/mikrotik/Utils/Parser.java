@@ -1,22 +1,22 @@
-package sy.iyad.mikrotik.Roots;
+package sy.iyad.mikrotik.Utils;
+
 
         import java.util.Arrays;
         import java.util.LinkedList;
         import java.util.List;
-
-        import static sy.iyad.mikrotik.Roots.Scanner.Token.EQUALS;
-        import static sy.iyad.mikrotik.Roots.Scanner.Token.LEFT_BRACKET;
-        import static sy.iyad.mikrotik.Roots.Scanner.Token.LESS;
-        import static sy.iyad.mikrotik.Roots.Scanner.Token.MORE;
-        import static sy.iyad.mikrotik.Roots.Scanner.Token.NOT;
-        import static sy.iyad.mikrotik.Roots.Scanner.Token.NOT_EQUALS;
-        import static sy.iyad.mikrotik.Roots.Scanner.Token.TEXT;
+        import static sy.iyad.mikrotik.Utils.Scanner.Token.EQUALS;
+        import static sy.iyad.mikrotik.Utils.Scanner.Token.LEFT_BRACKET;
+        import static sy.iyad.mikrotik.Utils.Scanner.Token.LESS;
+        import static sy.iyad.mikrotik.Utils.Scanner.Token.MORE;
+        import static sy.iyad.mikrotik.Utils.Scanner.Token.NOT;
+        import static sy.iyad.mikrotik.Utils.Scanner.Token.NOT_EQUALS;
+        import static sy.iyad.mikrotik.Utils.Scanner.Token.TEXT;
 
 
 /**
  * Parse the pseudo-command line into command objects.
  *
- * @author GideonLeGrange
+ * @author iyadFawwaz
  */
 class Parser {
 
@@ -200,7 +200,7 @@ class Parser {
             }
             next();
         }
-        cmd.addProperty(props.toArray(new String[props.size()]));
+        cmd.addProperty(props.toArray(new String[0]));
     }
 
     private void expect(Scanner.Token... tokens) throws ParseException {

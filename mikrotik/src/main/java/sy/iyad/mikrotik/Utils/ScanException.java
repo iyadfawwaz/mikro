@@ -1,6 +1,9 @@
-package sy.iyad.mikrotik.Roots;
+package sy.iyad.mikrotik.Utils;
+
+
 
 public class ScanException extends ParseException {
+
     public ScanException(String msg) {
         super(msg);
     }
@@ -8,4 +11,5 @@ public class ScanException extends ParseException {
     public ScanException(String msg, Throwable err) {
         super(msg, err);
     }
+
 }

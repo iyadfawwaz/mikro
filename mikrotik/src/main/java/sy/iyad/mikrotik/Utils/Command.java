@@ -1,5 +1,5 @@
 
-package sy.iyad.mikrotik.Roots;
+package sy.iyad.mikrotik.Utils;
 
         import java.util.Arrays;
         import java.util.LinkedList;
@@ -9,10 +9,11 @@ package sy.iyad.mikrotik.Roots;
  * A command sent to a Mikrotik. This internal class is used to build complex commands
  * with parameters, queries and property lists.
  *
- * @author GideonLeGrange
+ * @author iyadFawwaz
  */
 class Command {
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public String toString() {
         return String.format("cmd[%s] = %s, params = %s, queries = %s, props=%s ", tag, cmd, params, queries, properties);

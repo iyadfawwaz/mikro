@@ -1,21 +1,20 @@
-package sy.iyad.mikrotik.Roots;
+package sy.iyad.mikrotik.Utils;
+
 
         import java.io.IOException;
         import java.io.InputStream;
         import java.io.OutputStream;
         import java.io.UnsupportedEncodingException;
-        import java.nio.charset.Charset;
+        import java.nio.charset.StandardCharsets;
         import java.security.MessageDigest;
         import java.security.NoSuchAlgorithmException;
         import java.util.List;
-
-        import sy.iyad.mikrotik.Ready.ApiException;
 
 /**
  * Utility library that handles the low level encoding required by the Mikrotik
  * API.
  *
- * @author GideonLeGrange. Possibly some code by janisk left.
+ * @author iyadFawwaz. Possibly some code by janisk left.
  */
 final class Util {
 
@@ -65,7 +64,7 @@ final class Util {
         try {
             int len = readLen(in);
             if (len > 0) {
-                byte buf[] = new byte[len];
+                byte[] buf = new byte[len];
                 for (int i = 0; i < len; ++i) {
                     int c = in.read();
                     if (c < 0) {
@@ -73,7 +72,10 @@ final class Util {
                     }
                     buf[i] = (byte) (c & 0xFF);
                 }
-                String res = new String(buf, Charset.forName("UTF-8"));
+                String res = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                    res = new String(buf, StandardCharsets.UTF_8);
+                }
                 if (result.length() > 0) {
                     result.append("\n");
                 }
@@ -104,10 +106,10 @@ final class Util {
         }
         algorithm.reset();
         algorithm.update(defaultBytes);
-        byte messageDigest[] = algorithm.digest();
+        byte[] messageDigest = algorithm.digest();
         StringBuilder hexString = new StringBuilder();
-        for (int i = 0; i < messageDigest.length; i++) {
-            String hex = Integer.toHexString(0xFF & messageDigest[i]);
+        for (byte b : messageDigest) {
+            String hex = Integer.toHexString(0xFF & b);
             if (hex.length() == 1) {
                 hexString.append('0');
             }
@@ -135,7 +137,10 @@ final class Util {
      * stream.
      */
     private static void encode(String word, OutputStream out) throws UnsupportedEncodingException, IOException {
-        byte bytes[] = word.getBytes("UTF-8");
+        byte[] bytes = new byte[0];
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+            bytes = word.getBytes(StandardCharsets.UTF_8);
+        }
         int len = bytes.length;
         if (len < 0x80) {
             out.write(len);
@@ -170,6 +175,7 @@ final class Util {
     private static int readLen(InputStream in) throws IOException {
         int c = in.read();
         if (c > 0) {
+            //noinspection StatementWithEmptyBody
             if ((c & 0x80) == 0) {
             } else if ((c & 0xC0) == 0x80) {
                 c = c & ~0xC0;

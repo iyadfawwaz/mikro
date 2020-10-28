@@ -1,21 +1,21 @@
 package sy.iyad.server;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.QuickContactBadge;
-
 import sy.iyad.mikrotik.MikrotikServer;
-import sy.iyad.mikrotik.OnCompleteListener;
-import sy.iyad.mikrotik.PreReady.ConnectResult;
-import sy.iyad.mikrotik.PreReady.ExecuteResult;
-import sy.iyad.mikrotik.PreReady.Task;
+import sy.iyad.mikrotik.Models.ConnectionEventListener;
+import sy.iyad.mikrotik.Utils.Api;
+
 
 public class MainActivity extends AppCompatActivity {
 
     Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,27 +27,22 @@ public class MainActivity extends AppCompatActivity {
                 connExe();
             }
         });
-        connExe();
     }
-    private void connExe(){
-        MikrotikServer.connect("2.2.2.2","admin","995x").addOnCompleteListener(new OnCompleteListener<ConnectResult>() {
-            @Override
-            public void onComplete(@NonNull Task<ConnectResult> task) {
-                if (task.isSuccessful()){
-                    MikrotikServer.execute("/interface/print").addOnCompleteListener(new OnCompleteListener<ExecuteResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<ExecuteResult> taskx) {
-                            if (taskx.isSuccessful()){
-                                System.out.println(taskx.getResult().getMapList().toString());
-                            }else {
-                                System.out.println(taskx.getException().getMessage());
-                            }
-                        }
-                    });
-                }else {
-                    System.out.println(task.getException().getMessage());
-                }
-            }
-        });
+    private void connExe() {
+        MikrotikServer.connect("2.2.2.2", "admin", "995x")
+              .addConnectionEventListener(new ConnectionEventListener() {
+                  @Override
+                  public void onConnectionSuccess(Api result) {
+                      button.setText(result.toString());
+                      startActivity(new Intent(MainActivity.this,SecActivity.class));
+                  }
+
+                  @Override
+                  public void onConnectionFailed(Exception exception) {
+
+                      button.setText(exception.getMessage());
+                  }
+              });
+
     }
 }

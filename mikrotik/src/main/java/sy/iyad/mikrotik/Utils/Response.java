@@ -1,9 +1,9 @@
-package sy.iyad.mikrotik.Roots;
+package sy.iyad.mikrotik.Utils;
 
 /**
  * Super type of possible API responses
  *
- * @author GideonLeGrange
+ * @author iyadFawwaz
  */
 abstract class Response {
 
@@ -11,6 +11,7 @@ abstract class Response {
         return tag;
     }
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public String toString() {
         return String.format("%s: tag=%s", getClass().getSimpleName(), tag);

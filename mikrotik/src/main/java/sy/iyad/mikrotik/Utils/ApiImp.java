@@ -1,9 +1,8 @@
 
-package sy.iyad.mikrotik.Roots;
+package sy.iyad.mikrotik.Utils;
 
 
 import android.annotation.SuppressLint;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -19,16 +18,13 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import javax.net.SocketFactory;
-import sy.iyad.mikrotik.Ready.Api;
-import sy.iyad.mikrotik.Ready.ApiException;
-import sy.iyad.mikrotik.Ready.MikrotikApiException;
-import sy.iyad.mikrotik.Ready.ResultListener;
+
 
 /**
      * The Mikrotik API connection implementation. This is the class used to connect
      * to a remote Mikrotik and send commands to it.
      *
-     * @author GideonLeGrange
+     * @author iyadFawwaz
      */
     public final class ApiImp extends Api {
 

@@ -1,153 +1,126 @@
 package sy.iyad.mikrotik;
 
+
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-import sy.iyad.mikrotik.PreReady.ConnectResult;
-import sy.iyad.mikrotik.PreReady.ExecuteResult;
-import sy.iyad.mikrotik.PreReady.ServerConnector;
-import sy.iyad.mikrotik.PreReady.ServerExecutor;
-import sy.iyad.mikrotik.PreReady.Task;
-import sy.iyad.mikrotik.Ready.Api;
-import sy.iyad.mikrotik.Ready.ApiException;
+import sy.iyad.mikrotik.Models.ConnectResult;
+import sy.iyad.mikrotik.Models.ExecuteResult;
+import sy.iyad.mikrotik.Models.Connector;
+import sy.iyad.mikrotik.Models.Executor;
+import sy.iyad.mikrotik.Utils.Api;
+import sy.iyad.mikrotik.Utils.ApiException;
 
 
 public class MikrotikServer {
 
+
     public static final int DEFAULT_PORT=8728;
     public static final int DEFAULT_IMEOUT=3000;
-    private static Api api;
-    private static Task<ConnectResult> connectResultTask;
-    private static Task<ExecuteResult> executeResultTask;
-    private static List<Map<String, String>> mapList;
-    private static Exception internalException;
 
-    private void setupConnect( String ip, String username, String password,int port,int timeout){
-        String[] strings = new String[]{ip,username,password};
-        connectResultTask = new Task<>();
-        try {
-            api = new ServerConnector(port,timeout).execute(strings).get();
-            connectResultTask.setSuccessful(true);
-            ConnectResult connectResult = new ConnectResult();
-            connectResult.setApi(api);
-            connectResultTask.setResult(connectResult);
-        } catch (InterruptedException e) {
-            connectResultTask.setSuccessful(false);
-            connectResultTask.setException(e);
-           internalException = e;
-        } catch (ExecutionException e) {
-            connectResultTask.setSuccessful(false);
-            connectResultTask.setException(e);
-            internalException = e;
-        }
+    private static Api api;
+
+    private static ConnectResult connectResult;
+    private static ExecuteResult executeResult;
+
+    private Exception externaleXCEEPTION;
+
+
+    private void setupConnect( String ip, String username, String password,int port,int timeout) {
+
+        String[] strings = new String[]{ip, username, password};
+
+        Connector connector = new Connector(port, timeout);
+
+            try {
+                api = connector.execute(strings).get();
+                connectResult = new ConnectResult();
+                connectResult.setApi(api);
+
+            } catch (InterruptedException e) {
+
+               connectResult.setException(e);
+
+            } catch (ExecutionException e) {
+
+                connectResult.setException(e);
+            }
+            if (connector.getExternalExceptionFromConnector() != null){
+                this.externaleXCEEPTION = connector.getExternalExceptionFromConnector();
+                connectResult.setException(externaleXCEEPTION);
+            }
     }
 
-    public static Task<ConnectResult> connect( String ip, String username, String password,int port,int timeout){
+    public static ConnectResult connect(String ip, String username, String password, int port, int timeout){
         MikrotikServer mikrotikServer = new MikrotikServer();
         mikrotikServer.setupConnect(ip,username,password,port,timeout);
-        return connectResultTask;
+        return connectResult;
     }
 
-    public static Task<ConnectResult> connect( String ip, String admin, String password,int port){
+    public static ConnectResult connect(String ip, String admin, String password, int port){
         MikrotikServer mikrotikServer = new MikrotikServer();
         mikrotikServer.setupConnect(ip,admin,password,port,DEFAULT_IMEOUT);
-        return connectResultTask;
+        return connectResult;
     }
 
-    public static Task<ConnectResult> connect( String ip, String admin, String password){
+    public static ConnectResult connect(String ip, String admin, String password){
         MikrotikServer mikrotikServer = new MikrotikServer();
         mikrotikServer.setupConnect(ip,admin,password,DEFAULT_PORT,DEFAULT_IMEOUT);
-        return connectResultTask;
+        return connectResult;
     }
 
-    private void setupExecute( Api readyApi, String cmd){
-        executeResultTask = new Task<>();
-        try {
-            mapList = new ServerExecutor(cmd).execute(readyApi).get();
-            ExecuteResult executeResult = new ExecuteResult();
-            executeResult.setMapList(mapList);
-            executeResultTask.setSuccessful(true);
-            executeResultTask.setResult(executeResult);
-        } catch (ExecutionException e) {
-            executeResultTask.setSuccessful(false);
-            executeResultTask.setException(e);
-            internalException = e;
-        } catch (InterruptedException e) {
-            executeResultTask.setSuccessful(false);
-            executeResultTask.setException(e);
-            internalException = e;
-        }
+    private void setupExecute( Api readyApi, String cmd) {
+
+        Executor executor = new Executor(cmd);
+
+            try {
+
+                List<Map<String, String>> mapList = executor.execute(readyApi).get();
+                executeResult = new ExecuteResult();
+                executeResult.setMapList(mapList);
+
+            } catch (ExecutionException e) {
+
+                executeResult.setException(e);
+
+            } catch (InterruptedException e) {
+
+               executeResult.setException(e);
+
+            }
+            if (executor.getExternalExceptionFromExecutor()!= null) {
+                this.externaleXCEEPTION = executor.getExternalExceptionFromExecutor();
+                executeResult.setException(externaleXCEEPTION);
+            }
     }
 
-    public static Task<ExecuteResult> execute( Api api, String cmd){
+    public static ExecuteResult execute(Api apiLocal, String cmd){
+        MikrotikServer mikrotikServer = new MikrotikServer();
+        mikrotikServer.setupExecute(apiLocal,cmd);
+        return executeResult;
+    }
+
+    public static ExecuteResult execute(String cmd){
+
         MikrotikServer mikrotikServer = new MikrotikServer();
         mikrotikServer.setupExecute(api,cmd);
-        return executeResultTask;
+        return executeResult;
+
     }
 
-    public static Task<ExecuteResult> execute( String cmd){
-        MikrotikServer mikrotikServer = new MikrotikServer();
-      if(api!=null){
-       mikrotikServer.setupExecute(api,cmd);
-      }else{
-        try{
-        throw new Exception("لا يوجد اتصال مسبق يرجى طلب connect");
-      }catch(Exception ex){
-        internalException =ex;
-      }
+    public static Api getApi() {
+        return api;
     }
-      return executeResultTask;
-    }
+
 
     public static String disconnect(){
         try {
             api.close();
             return "disconnected";
         } catch (ApiException e) {
-            internalException = e;
+
             return e.getMessage();
         }
     }
-
-    /*public void addOnCompleteListener(@NonNull OnCompleteListener<ConnectResult> listener){
-
-        Task<ConnectResult> task = new Task<>();
-        if (api!= null){
-            ConnectResult result = new ConnectResult();
-            task.setSuccessful(true);
-            result.setApi(api);
-            task.setResult(result);
-        }else if (internalException != null){
-            task.setSuccessful(false);
-            task.setException(internalException);
-        }else if (ServerConnector.externalExceptionFromConnector != null){
-            task.setSuccessful(false);
-            task.setException(ServerConnector.externalExceptionFromConnector);
-        }else {
-            task.setSuccessful(false);
-            task.setException(new ApiException("unknown exception"));
-        }
-        listener.onComplete(task);
-    }*/
-/*
-    public ExecuteResult addOnCompleteListener(@NonNull OnCompleteListener<ExecuteResult> listener){
-        Task<ExecuteResult> task = new Task<>();
-        if (mapList != null) {
-            task.setSuccessful(true);
-            ExecuteResult result = new ExecuteResult();
-            result.setMapList(mapList);
-            task.setResult(result);
-        } else if (internalException!=null) {
-            task.setSuccessful(false);
-            task.setException(internalException);
-        }else if (ServerExecutor.externalExceptionFromExecutor!=null) {
-            task.setSuccessful(false);
-            task.setException(ServerExecutor.externalExceptionFromExecutor);
-        } else {
-            task.setSuccessful(false);
-            task.setException(new ApiException("unknown Error in ServerExecutor StriaLink"));
-        }
-        listener.onComplete(task);
-    }*/
 
 }

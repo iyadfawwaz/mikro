@@ -1,4 +1,5 @@
-package sy.iyad.mikrotik.Roots;
+package sy.iyad.mikrotik.Utils;
+
 
             import java.util.Collection;
             import java.util.HashMap;
@@ -7,7 +8,7 @@ package sy.iyad.mikrotik.Roots;
 
 /**
  * A result from an API command.
- * @author GideonLeGrange
+ * @author iyadFawwaz
  */
 class Result extends Response implements Map<String, String> {
 
@@ -20,6 +21,7 @@ class Result extends Response implements Map<String, String> {
         return map.isEmpty();
     }
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public String toString() {
         return String.format("tag=%s, data=%s", getTag(), map);
@@ -56,7 +58,7 @@ class Result extends Response implements Map<String, String> {
     }
 
     @Override
-    public void putAll(Map<? extends String, ? extends String> map) {
+    public void putAll(@SuppressWarnings("NullableProblems") Map<? extends String, ? extends String> map) {
         this.map.putAll(map);
     }
 
@@ -65,16 +67,19 @@ class Result extends Response implements Map<String, String> {
         map.clear();
     }
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public Set<String> keySet() {
         return map.keySet();
     }
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public Collection<String> values() {
         return map.values();
     }
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public Set<Entry<String, String>> entrySet() {
         return map.entrySet();

@@ -1,28 +1,40 @@
-package sy.iyad.mikrotik.PreReady;
+package sy.iyad.mikrotik.Models;
+
 
 import android.os.AsyncTask;
 import java.util.List;
 import java.util.Map;
-import sy.iyad.mikrotik.Ready.Api;
-import sy.iyad.mikrotik.Ready.MikrotikApiException;
+import sy.iyad.mikrotik.Utils.Api;
+import sy.iyad.mikrotik.Utils.MikrotikApiException;
 
 
-public class ServerExecutor extends AsyncTask<Api,Integer, List<Map<String,String>>> {
+public class Executor extends AsyncTask<Api,Integer, List<Map<String,String>>> {
+
     public String cmd;
-    public static Exception externalExceptionFromExecutor;
+    private Exception externalExceptionFromExecutor;
+
     @SuppressWarnings("deprecation")
-    public ServerExecutor( String cmd){
+    public Executor(String cmd){
+
         this.cmd = cmd;
     }
+
     @Override
     protected List<Map<String, String>> doInBackground(Api... apis) {
         List<Map<String, String>> mapList;
         try {
+
             mapList = apis[0].execute(cmd);
             return mapList;
+
         } catch (MikrotikApiException e) {
             externalExceptionFromExecutor = e;
         }
+
         return null;
+    }
+
+    public Exception getExternalExceptionFromExecutor() {
+        return externalExceptionFromExecutor;
     }
 }

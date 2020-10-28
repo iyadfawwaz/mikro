@@ -1,12 +1,10 @@
-package sy.iyad.mikrotik.Roots;
+package sy.iyad.mikrotik.Utils;
 
-
-import sy.iyad.mikrotik.Ready.MikrotikApiException;
 
 /**
  * Thrown when the Mikrotik returns an error when receiving our command.
  *
- * @author GideonLeGrange
+ * @author iyadFawwaz
  */
 public class ApiCommandException extends MikrotikApiException {
 

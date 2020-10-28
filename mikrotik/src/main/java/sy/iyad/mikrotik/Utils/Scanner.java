@@ -1,7 +1,7 @@
-package sy.iyad.mikrotik.Roots;
+package sy.iyad.mikrotik.Utils;
 
 /*
- * Copyright 2014 GideonLeGrange.
+ * Copyright 2014 iyadFawwaz.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ package sy.iyad.mikrotik.Roots;
 /**
  * A simple scanner.
  *
- * @author gideon
+ * @author iyadFawwaz
  */
 class Scanner {
 
@@ -33,6 +33,7 @@ class Scanner {
         LEFT_BRACKET("("), RIGHT_BRACKET(")"),
         WHERE, NOT, AND, OR, RETURN;
 
+        @SuppressWarnings("NullableProblems")
         @Override
         public String toString() {
             return (symb == null) ? name() : symb;
@@ -123,7 +124,7 @@ class Scanner {
      */
     private Token name() throws ScanException {
         text = new StringBuilder();
-        while (!in(c, "[ \t\r\n=<>!)]")) {
+        while (!in(c)) {
             text.append(c);
             nextChar();
         }
@@ -197,8 +198,8 @@ class Scanner {
     /**
      * check if the character matches the give expression
      */
-    private boolean in(char c, String cs) {
-        return ("" + c).matches(cs);
+    private boolean in(char c) {
+        return ("" + c).matches("[ \t\r\n=<>!)]");
     }
 
     private final String line;

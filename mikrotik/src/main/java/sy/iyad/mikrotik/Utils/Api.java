@@ -1,18 +1,17 @@
 
-package sy.iyad.mikrotik.Ready;
+package sy.iyad.mikrotik.Utils;
 
         import android.annotation.SuppressLint;
         import java.util.List;
         import java.util.Map;
         import javax.net.SocketFactory;
-        import sy.iyad.mikrotik.Roots.ApiImp;
 
 
 /**
  * The Mikrotik API connection. This is the class used to connect to a remote
  * Mikrotik and send commands to it.
  *
- * @author GideonLeGrange
+ * @author iyadFawwaz
  */
 @SuppressLint("NewApi")
 public abstract class Api implements AutoCloseable {

@@ -8,7 +8,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
-        versionName "1.10.14"
+        versionName "1.10.28"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -24,11 +24,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    testImplementation 'junit:junit:4.13.1'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
 }
 ext {
     bintrayRepo = 'mikro'
@@ -36,11 +31,11 @@ ext {
     publishedGroupId = 'sy.iyad'
     libraryName = 'mikrotik'
     artifact = 'mikrotik'
-    libraryDescription = 'A widget to load WebView as an Overlay.’'
+    libraryDescription = 'A library to mikrotik server remote.’'
     siteUrl = 'https://github.com/iyadseizer/mikro'
     gitUrl = 'https://github.com/iyadseizer/mikro.git'
-    libraryVersion = '1.10.15'
-    developerId = 'developerId'
+    libraryVersion = '1.10.28'
+    developerId = 'iyadseizer'
     developerName = 'iyad fawwaz'
     developerEmail = 'se.black3d@email.com'
     licenseName = 'The Apache Software License, Version 2.0'
