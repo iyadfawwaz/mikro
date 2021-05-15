@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void connExe() {
-        MikrotikServer.connect("2.2.2.2", "admin", "995x")
+        MikrotikServer.newConnect("2.2.2.2", "admin", "995x")
               .addConnectionEventListener(new ConnectionEventListener() {
                   @Override
                   public void onConnectionSuccess(Api result) {

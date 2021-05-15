@@ -7,13 +7,12 @@ import java.util.Map;
 import sy.iyad.mikrotik.Utils.Api;
 import sy.iyad.mikrotik.Utils.MikrotikApiException;
 
-
+@Deprecated
 public class Executor extends AsyncTask<Api,Integer, List<Map<String,String>>> {
 
     public String cmd;
     private Exception externalExceptionFromExecutor;
 
-    @SuppressWarnings("deprecation")
     public Executor(String cmd){
 
         this.cmd = cmd;

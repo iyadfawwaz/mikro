@@ -5,7 +5,7 @@ import javax.net.SocketFactory;
 import sy.iyad.mikrotik.Utils.Api;
 import sy.iyad.mikrotik.Utils.MikrotikApiException;
 
-
+@Deprecated
 public class Connector extends AsyncTask<String,Integer, Api> {
 
     private Exception externalExceptionFromConnector;
@@ -13,7 +13,6 @@ public class Connector extends AsyncTask<String,Integer, Api> {
     public int CUSTOMER_PORT;
     public int CUSTOMER_TIMEOUT;
 
-    @SuppressWarnings("deprecation")
     public Connector(int port, int timeout)  {
 
         this.CUSTOMER_PORT=port;
