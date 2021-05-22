@@ -2,7 +2,6 @@ package sy.iyad.server;
 
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,12 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         button = findViewById(R.id.btn);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                connExe();
-            }
-        });
+        button.setOnClickListener(v -> connExe());
     }
     private void connExe() {
         MikrotikServer.newConnect("2.2.2.2", "admin", "995x")

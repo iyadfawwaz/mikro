@@ -2,7 +2,6 @@ package sy.iyad.server;
 
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,13 +20,7 @@ public class SecActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sec);
         button = findViewById(R.id.xbtn);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                exe();
-            }
-        });
+        button.setOnClickListener(v -> exe());
     }
 
     @Override
