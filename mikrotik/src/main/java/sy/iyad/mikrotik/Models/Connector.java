@@ -1,43 +1,26 @@
 package sy.iyad.mikrotik.Models;
 
-import android.os.AsyncTask;
-import javax.net.SocketFactory;
+
 import sy.iyad.mikrotik.Utils.Api;
-import sy.iyad.mikrotik.Utils.MikrotikApiException;
+import sy.iyad.mikrotik.Utils.ApiImp;
+import javax.net.SocketFactory;
+import java.util.concurrent.Callable;
 
-@Deprecated
-public class Connector extends AsyncTask<String,Integer, Api> {
 
-    private Exception externalExceptionFromConnector;
+public class Connector implements Callable<ApiImp> {
 
-    public int CUSTOMER_PORT;
-    public int CUSTOMER_TIMEOUT;
+    private final String[] entry;
+    private final int[] numbers;
 
-    public Connector(int port, int timeout)  {
-
-        this.CUSTOMER_PORT=port;
-        this.CUSTOMER_TIMEOUT=timeout;
-
+    public Connector(String[] entry, int[] numbers){
+        this.entry = entry;
+        this.numbers = numbers;
     }
-
     @Override
-    protected Api doInBackground(String... strings) {
-
-        Api api;
-        try {
-
-            api = Api.connect(SocketFactory.getDefault(),strings[0],CUSTOMER_PORT,CUSTOMER_TIMEOUT);
-            api.login(strings[1],strings[2]);
-            return api;
-
-        } catch (MikrotikApiException e) {
-            externalExceptionFromConnector = e;
-        }
-
-        return null;
-    }
-
-    public Exception getExternalExceptionFromConnector() {
-        return externalExceptionFromConnector;
+    public ApiImp call() throws Exception {
+        ApiImp apiImp;
+        apiImp = (ApiImp) Api.connect(SocketFactory.getDefault(),entry[0],numbers[0],numbers[1]);
+        apiImp.login(entry[1],entry[2]);
+        return apiImp;
     }
 }

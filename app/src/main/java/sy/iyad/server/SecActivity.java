@@ -30,7 +30,7 @@ public class SecActivity extends AppCompatActivity {
     }
 
     private void exe(){
-        MikrotikServer.newExecute("ip/address/print")
+        MikrotikServer.execute("ip/address/print")
                .addExecutionEventListener(new ExecutionEventListener() {
                    @Override
                    public void onExecutionSuccess(List<Map<String,String>> result) {

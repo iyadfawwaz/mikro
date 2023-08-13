@@ -4,11 +4,13 @@ package sy.iyad.server;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
 import sy.iyad.mikrotik.MikrotikServer;
 import sy.iyad.mikrotik.Models.ConnectionEventListener;
 import sy.iyad.mikrotik.Utils.Api;
+import sy.iyad.mikrotik.Utils.ApiImp;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(v -> connExe());
     }
     private void connExe() {
-        MikrotikServer.newConnect("2.2.2.2", "admin", "995x")
+        MikrotikServer.connect("2.2.2.2", "admin", "995x")
               .addConnectionEventListener(new ConnectionEventListener() {
                   @Override
                   public void onConnectionSuccess(Api result) {
@@ -35,6 +37,20 @@ public class MainActivity extends AppCompatActivity {
                   public void onConnectionFailed(Exception exception) {
 
                       button.setText(exception.getMessage());
+                      MikrotikServer.connectWithDefaultPort("10.1.0.1","admin","amisa",1000)
+                              .addConnectionEventListener(new ConnectionEventListener() {
+                                  @Override
+                                  public void onConnectionSuccess(Api api) {
+                                      Toast.makeText(MainActivity.this,api.toString(),Toast.LENGTH_LONG).show();
+                                      MikrotikServer.execute((ApiImp) api,"/ip/address/print");
+
+                                  }
+
+                                  @Override
+                                  public void onConnectionFailed(Exception exception) {
+
+                                  }
+                              });
                   }
               });
 

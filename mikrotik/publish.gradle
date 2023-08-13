@@ -1,7 +1,10 @@
-apply plugin: 'maven-publish'
-apply plugin: 'com.jfrog.bintray'
+ plugins {
+     id 'maven-publish'
+     id 'java-library'
+ }
+ //plugin: 'com.jfrog.bintray'
 
-version '1.10.14'
+version '2.1.0'
 group 'sy.iyad'
 
 publishing {
@@ -32,7 +35,7 @@ publishing {
 
 bintray {
     user = System.getenv('iyadseizer')
-    key = System.getenv('74c942dfed50ae1131023e42326ca75d4d0982d8')
+    key = System.getenv('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')
     publications = ['Production']
     configurations = ['archives']
     override = true
@@ -52,4 +55,8 @@ bintray {
             vcsTag = this.version
         }
     }
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }

@@ -1,39 +1,27 @@
 package sy.iyad.mikrotik.Models;
 
 
-import android.os.AsyncTask;
+import sy.iyad.mikrotik.Utils.ApiImp;
 import java.util.List;
 import java.util.Map;
-import sy.iyad.mikrotik.Utils.Api;
-import sy.iyad.mikrotik.Utils.MikrotikApiException;
+import java.util.concurrent.Callable;
 
-@Deprecated
-public class Executor extends AsyncTask<Api,Integer, List<Map<String,String>>> {
 
-    public String cmd;
-    private Exception externalExceptionFromExecutor;
+public class Executor implements Callable<List<Map<String,String>>> {
 
-    public Executor(String cmd){
+    private final ApiImp apiImp;
+    private final String cmd;
 
+    public Executor(ApiImp apiImp, String cmd) {
+        this.apiImp = apiImp;
         this.cmd = cmd;
     }
 
     @Override
-    protected List<Map<String, String>> doInBackground(Api... apis) {
-        List<Map<String, String>> mapList;
-        try {
+    public List<Map<String, String>> call() throws Exception {
 
-            mapList = apis[0].execute(cmd);
-            return mapList;
-
-        } catch (MikrotikApiException e) {
-            externalExceptionFromExecutor = e;
-        }
-
-        return null;
-    }
-
-    public Exception getExternalExceptionFromExecutor() {
-        return externalExceptionFromExecutor;
+        List<Map<String,String>> mapList;
+        mapList = apiImp.execute(cmd);
+        return mapList;
     }
 }

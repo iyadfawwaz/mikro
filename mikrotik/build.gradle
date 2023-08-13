@@ -1,14 +1,18 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+    id 'maven-publish'
+}
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    namespace 'sy.iyad.mikrotik'
+    compileSdk 33
+
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 30
+        minSdkVersion 21
+        targetSdkVersion 33
         versionCode 1
-        versionName "1.10.28"
+        versionName "2.1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -20,15 +24,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
 }
+
 ext {
     bintrayRepo = 'mikro'
     bintrayName = 'mikrotik'
@@ -38,7 +44,7 @@ ext {
     libraryDescription = 'A library to mikrotik server remote.’'
     siteUrl = 'https://github.com/iyadseizer/mikro'
     gitUrl = 'https://github.com/iyadseizer/mikro.git'
-    libraryVersion = '1.10.28'
+    libraryVersion = '2.1.0'
     developerId = 'iyadseizer'
     developerName = 'iyad fawwaz'
     developerEmail = 'se.black3d@email.com'
@@ -48,3 +54,4 @@ ext {
 }
 //apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
 //apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+
