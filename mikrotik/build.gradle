@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdk 33
         versionCode 1
         versionName "2.1.0"
 
@@ -34,6 +34,35 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
+}
+publishing {
+    publications {
+        bar(MavenPublication) {
+            groupId 'sy.iyad' // Replace with group ID
+            artifactId 'mikrotik'
+            version '2.1.0'
+            artifact("$buildDir/outputs/aar/mikrotik-release.aar")
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            /** Configure path of your package repository on Github
+             ** Replace GITHUB_USERID with your/organisation Github userID
+             ** and REPOSITORY with the repository name on GitHub
+             */
+            url = uri("https://maven.pkg.github.com/iyadseizer/mikro")
+            credentials {
+                /** Create github.properties in root project folder file with
+                 ** gpr.usr=GITHUB_USER_ID & gpr.key=PERSONAL_ACCESS_TOKEN
+                 ** Set env variable GPR_USER & GPR_API_KEY if not adding a properties file**/
+
+                username = project.usr
+                password = project.key
+            }
+        }
+    }
 }
 
 ext {

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        app:layout_anchorGravity="center"
+        android:fillViewport="true">
+    </androidx.core.widget.NestedScrollView>-->
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/newx"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/linx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cardview_dark_background"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/cardview_shadow_end_color">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/c0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/d4"
+                    app:cardCornerRadius="@dimen/d4"
+                    app:cardElevation="@dimen/d4"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/d5"
+                        android:autoLink="web|all|email|phone|map"
+                        android:background="@color/red"
+                        android:fontFamily="sans-serif-condensed"
+                        android:linksClickable="true"
+                        android:textColor="@color/white"
+                        android:textIsSelectable="true" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/c1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/d4"
+                    app:cardCornerRadius="@dimen/d4"
+                    app:cardElevation="@dimen/d4"
+                    app:layout_constraintBottom_toTopOf="@+id/c2"
+                    app:layout_constraintTop_toBottomOf="@id/c0">
+
+                    <EditText
+                        android:id="@+id/ip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/d4"
+                        android:autofillHints="@string/app_name"
+                        android:background="@color/white"
+                        android:ems="10"
+                        android:focusableInTouchMode="true"
+                        android:fontFamily="serif-monospace"
+                        android:hint="@string/ip"
+                        android:inputType="textPersonName"
+                        android:padding="@dimen/d4" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/c2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/d4"
+                    app:cardCornerRadius="@dimen/d4"
+                    app:cardElevation="@dimen/d4"
+                    app:layout_constraintBottom_toTopOf="@id/c3"
+                    app:layout_constraintTop_toBottomOf="@id/c1">
+
+                    <EditText
+                        android:id="@+id/admin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/d4"
+                        android:autofillHints="@string/app_name"
+                        android:background="@color/white"
+                        android:ems="10"
+                        android:focusableInTouchMode="true"
+                        android:fontFamily="serif-monospace"
+                        android:hint="@string/user"
+                        android:inputType="textPersonName"
+                        android:padding="@dimen/d4" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/c3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/d4"
+                    app:cardCornerRadius="@dimen/d4"
+                    app:cardElevation="@dimen/d4"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/c2">
+
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/d4"
+                        android:autofillHints="@string/app_name"
+                        android:background="@color/white"
+                        android:ems="10"
+                        android:focusableInTouchMode="true"
+                        android:fontFamily="serif-monospace"
+                        android:hint="@string/pass"
+                        android:inputType="textPassword"
+                        android:padding="@dimen/d4" />
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/connect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d4"
+            android:background="@color/teal_200"
+            android:fontFamily="serif-monospace"
+            android:padding="@dimen/d4"
+            android:text="@string/log"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d4"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/d4"
+            android:src="@drawable/syavatar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/linx" />
+
+        <CheckBox
+        android:buttonTint="@color/orange"
+        android:backgroundTint="@color/black"
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/saveb"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linx" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        style="@style/Widget.MaterialComponents.BottomAppBar.PrimarySurface"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:layout_gravity="bottom" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        style="@style/Animation.Design.BottomSheetDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/d5"
+        android:layout_marginBottom="@dimen/d5"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:contentDescription="@string/app_name"
+        android:focusable="true"
+        app:layout_anchorGravity="start"
+        android:src="@drawable/avatarx"
+        app:backgroundTint="@color/orange"
+        app:layout_anchor="@id/bottomAppBar"
+        tools:srcCompat="@drawable/avatarx" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
