@@ -3,6 +3,10 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven {
+            // change to point to your repo, e.g. http://my.org/repo
+            url = 'https://github.com/iyadseizer/mikro'
+        }
     }
 }
 dependencyResolutionManagement {
@@ -10,6 +14,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            // change to point to your repo, e.g. http://my.org/repo
+            url = 'https://github.com/iyadseizer/mikro'
+        }
     }
 }
 rootProject.name = "Server"
